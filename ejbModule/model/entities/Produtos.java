@@ -4,6 +4,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
@@ -21,28 +23,45 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "produtos")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Produtos.findAll", query = "SELECT p FROM Produtos p")
-    , @NamedQuery(name = "Produtos.findById", query = "SELECT p FROM Produtos p WHERE p.id = :id")})
+    @NamedQuery(name = "Produtos.findAll", query = "SELECT p FROM Produtos p"),
+    @NamedQuery(name = "Produtos.findById", query = "SELECT p FROM Produtos p WHERE p.id = :id")})
 public class Produtos implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")
     protected Integer id;
+    
+    
     @Basic(optional = false)
     @NotNull
     @Lob
     @Size(min = 1, max = 65535)
     @Column(name = "nome")
     private String nome;
+
     @Lob
     @Size(max = 65535)
     @Column(name = "descricao")
     private String descricao;
 
-    public Produtos() {
+    @Column(name = "preco")
+    private double preco;
+
+    @Column(name = "quantidade")
+    private double quantidade;
+    
+    @Lob
+    @Column(name = "imagem", nullable = false, columnDefinition="longblob") 
+    private byte[] imagem;
+    
+    
+    
+	public Produtos() {
     }
 
     public Produtos(Integer id) {
@@ -78,7 +97,23 @@ public class Produtos implements Serializable {
         this.descricao = descricao;
     }
 
-    @Override
+    public double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(double preco) {
+		this.preco = preco;
+	}
+
+	public byte[] getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(byte[] imagem) {
+		this.imagem = imagem;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
