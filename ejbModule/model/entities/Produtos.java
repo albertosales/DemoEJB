@@ -50,10 +50,14 @@ public class Produtos implements Serializable {
     private String descricao;
 
     @Column(name = "preco")
-    private double preco;
+    private Double preco;
 
     @Column(name = "quantidade")
-    private double quantidade;
+    private Double quantidade;
+
+    
+    @Column(name = "referencia", nullable = true)
+    private String referencia;
     
     @Lob
     @Column(name = "imagem", nullable = false, columnDefinition="longblob") 
@@ -111,6 +115,22 @@ public class Produtos implements Serializable {
 
 	public void setImagem(byte[] imagem) {
 		this.imagem = imagem;
+	}
+	
+	public Double getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(Double quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public String getReferencia() {
+		return referencia;
+	}
+
+	public void setReferencia(String referencia) {
+		this.referencia = referencia;
 	}
 
 	@Override
