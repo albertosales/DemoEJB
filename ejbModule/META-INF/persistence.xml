@@ -6,7 +6,10 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>java:/MySql-Market</jta-data-source>
         <class>model.entities.Produtos</class>
-    	<class>model.entities.Usuarios</class>    	
+    	<class>model.entities.Usuarios</class>
+		<class>model.entities.Pedido</class>
+        <class>model.entities.Pagamento</class>
+        <class>model.entities.ItemPedido</class>		
 		<properties>
             <property name='hibernate.hbm2ddl.auto' value='update'/>
         </properties>
